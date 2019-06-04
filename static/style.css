@@ -1,0 +1,23 @@
+@font-face {
+  font-family: "radnika_next";
+  src: url("/static/radnikanext-medium-webfont.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  outline: none;
+}
+
+body {
+  padding: 1.5rem;
+  margin: 0;
+  line-height: 2;
+  font-family: "radnika_next";
+  color: #1a202c;
+}

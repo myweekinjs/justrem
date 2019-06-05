@@ -2,6 +2,7 @@
 import { jsx, css } from "@emotion/core";
 import styled from "@emotion/styled";
 import { Component } from "react";
+import Head from "next/head";
 import Input from "../components/Input";
 import Logo from "../components/Logo";
 import SettingsButton from "../components/SettingsButton";
@@ -91,7 +92,10 @@ export default class Home extends Component {
 
         // eslint-disable-next-line no-restricted-globals
         if (!isNaN(pxInt)) {
-          const calcRem = this.calculateRem(pxInt).toFixed(3);
+          let calcRem = this.calculateRem(pxInt).toFixed(3);
+          calcRem = calcRem.replace(/0+$/, "");
+          calcRem = calcRem.replace(/\.+$/, "");
+
           return (
             // eslint-disable-next-line react/no-array-index-key
             <ResultItem key={i}>
@@ -124,24 +128,62 @@ export default class Home extends Component {
     const { rem, base, unit, dropdownActive } = this.state;
     return (
       <div>
+        <Head>
+          <title>Just REM | Online rem calculator</title>
+          <meta
+            name="description"
+            content="Easily and quickly convert pixel values into rem values. Change the base to match your project specifications."
+          />
+          <meta property="og:site_name" content="Just REM" />
+          <meta property="og:og:type" content="article" />
+          <meta property="og:url" content="https://justrem.xyz/" />
+          <meta
+            property="og:title"
+            content="Just REM | Online rem calculator"
+          />
+          <meta
+            property="og:description"
+            content="Easily and quickly convert pixel values into rem values. Change the base to match your project specifications."
+          />
+          <meta name="twitter:site" content="@hurricane_int" />
+          <meta name="twitter:card" content="summary" />
+          <meta
+            name="twitter:title"
+            content="Just REM | Online rem calculator"
+          />
+          <meta
+            name="twitter:description"
+            content="Easily and quickly convert pixel values into rem values. Change the base to match your project specifications."
+          />
+        </Head>
         <Logo>Just REM</Logo>
+        <p
+          css={css`
+            text-align: center;
+            margin-bottom: 2rem;
+            margin-top: 0;
+          `}
+        >
+          Easily and quickly convert pixel values into rem values.
+        </p>
         <RemInputWrapper>
           <Input
             value={rem}
             name="rem"
+            placeholder="10, 20, 12"
             // eslint-disable-next-line prettier/prettier
             onChange={(e) => {
               this.setState({
                 rem: e.target.value
               });
             }}
+            aria-label="Rem"
           />
           <DropdownWrapper>
             <SettingsButton
               // eslint-disable-next-line prettier/prettier
               onClick={(e) => {
                 e.preventDefault();
-                const { dropdownActive } = this.state;
                 this.setState({
                   dropdownActive: !dropdownActive
                 });
@@ -152,7 +194,7 @@ export default class Home extends Component {
             {dropdownActive ? (
               <Dropdown>
                 <label htmlFor="unit">
-                  Unit{" "}
+                  Append{" "}
                   <input
                     type="text"
                     name="unit"

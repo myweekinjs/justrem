@@ -5,6 +5,7 @@ const DropdownWrapper = styled.div`
 `;
 
 const Dropdown = styled.div`
+  z-index: 10;
   position: absolute;
   right: 0;
   top: calc(100% + 1rem);
@@ -13,6 +14,7 @@ const Dropdown = styled.div`
   box-shadow: 0 3px 6px 0 rgba(26, 32, 44, 0.24);
   padding: 1.5rem;
   width: 270px;
+  background: white;
   label {
     font-size: 0.75rem;
     text-transform: uppercase;
